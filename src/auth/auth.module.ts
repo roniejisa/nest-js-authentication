@@ -8,6 +8,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants } from "./constants";
 import { AuthController } from "./auth.controller";
 import { GoogleStrategy } from "./google.strategy";
+import { RefreshTokenStrategy } from "./refresh-token.strategy";
 
 @Module({
   imports: [
@@ -20,7 +21,13 @@ import { GoogleStrategy } from "./google.strategy";
       signOptions: { expiresIn: "60s" },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy, GoogleStrategy],
+  providers: [
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+    GoogleStrategy,
+    RefreshTokenStrategy,
+  ],
   controllers: [AuthController],
   exports: [AuthService],
 })

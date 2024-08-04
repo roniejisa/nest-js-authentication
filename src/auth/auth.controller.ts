@@ -1,16 +1,9 @@
-import {
-  Controller,
-  Get,
-  Request,
-  Post,
-  UseGuards,
-  Req,
-  Res,
-} from "@nestjs/common";
+import { Controller, Get, Request, Post, UseGuards, Req } from "@nestjs/common";
 import { JwtAuthGuard } from "./jwt-auth.guard";
 import { LocalAuthGuard } from "./local-auth.guard";
 import { AuthService } from "./auth.service";
 import { GoogleOauthGuard } from "./google-oauth.guard";
+import { RefreshTokenGuard } from "./refresh-token.guard";
 
 @Controller("auth")
 export class AuthController {
@@ -35,6 +28,14 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get("profile")
   getProfile(@Request() req) {
+    console.log(req.user, "huhu");
     return req.user;
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Post("refresh")
+  async refresh(@Req() req) {
+    console.log(req.user);
+    return this.authService.createToken(req.user);
   }
 }
