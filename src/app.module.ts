@@ -5,6 +5,7 @@ import { UserModule } from "./users/user.module";
 import { DatabaseModule } from "./database/database.module";
 import { StoreModule } from "./store/store.module";
 import { SocketModule } from "./socket/socket.module";
+import { EcommerceModule } from "./ecommerce/ecommerce.module";
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { SocketModule } from "./socket/socket.module";
     AuthModule,
     StoreModule.forRoot(),
     SocketModule,
+    EcommerceModule,
   ],
 })
 export class AppModule {}
